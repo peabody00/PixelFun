@@ -9,8 +9,26 @@
 <body>
     <h1>Pixel Fun</h1>
     <div id='welcome-container'></div>
-    <div id='artwork-container'></div>
-    <div id='tools-container'></div>
+    <div id='tools-container'>
+        <h2>Choose Grid Size</h2>
+        <form id="sizePicker">
+            Grid Height:
+            <input type="number" id="inputHeight" name="height" min="1" value="10">
+            Grid Width:
+            <input type="number" id="inputWidth" name="width" min="1" value="10">
+            <input type="submit" id="submitButton">
+        </form>
+
+        <h2>Pick A Color</h2>
+        <input type="color" id="colorPicker">
+        <input type="button" id="fill" value="fill canvas">
+        <input type="button" id="fillArea" value="fill area">
+        <input type="button" id="eyedropper" value="eyedropper">
+    </div>
+    <div id='artwork-container'>
+        <h2>Design Canvas</h2>
+        <table id="pixelGrid"></table>
+    </div>
 
     <script src="src/artwork.js" ></script>
     <script src="src/artworkService.js"></script>
