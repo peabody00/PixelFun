@@ -189,8 +189,8 @@ function fillBucket(sr, sc, newColor, targetColor, current) {
 		current.style.backgroundColor = newColor
 	}
 
-	fillBucket(sr - 1, sc, newColor, targetColor, current);
-	// fillBucket(sr + 1, sc, newColor, targetColor, current);
+	// fillBucket(sr - 1, sc, newColor, targetColor, current);
+	fillBucket(sr + 1, sc, newColor, targetColor, current);
 	// fillBucket(sr, sc - 1, newColor, targetColor, current);
 	// fillBucket(sr, sc + 1, newColor, targetColor, current);
 
