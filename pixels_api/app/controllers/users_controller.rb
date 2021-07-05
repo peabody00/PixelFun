@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    byebug
     @user = User.new(user_params)
 
     if @user.save
@@ -23,6 +22,11 @@ class UsersController < ApplicationController
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+  end
+
+  def login
+    user = User.find_by(username: user_params[:username])
+    byebug
   end
 
   # PATCH/PUT /users/1
@@ -47,6 +51,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :first_name, :last_name)
+      params.require(:user).permit(:username, :first_name, :last_name)
     end
 end
