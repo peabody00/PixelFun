@@ -1,5 +1,6 @@
 class User {
-    constructor(username) {
+    constructor(id, username) {
+        this.id = id
         this.username = username;
     }
 }
@@ -8,6 +9,7 @@ const userButton = document.getElementById('user-create')
 const usernameInput = document.getElementById('username-input')
 const loginButton = document.getElementById('user-login')
 const loginInput = document.getElementById('username-login')
+const loginHideButtons = document.getElementById("login-container")
 
 //CREATE USER
 
@@ -58,4 +60,9 @@ function loginUser(username) {
     })
     .then(resp => resp.json())
     .then(data => console.log(data))
+}
+
+//HIDE LOGIN BUTTONS
+function hideLoginButtons() {
+    loginHideButtons.style.display = "none";
 }

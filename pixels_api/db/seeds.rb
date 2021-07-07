@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(username: "frogers", first_name: "Fred", last_name: "Rogers")
+
+Artwork.create(name: "Flower", height: "20", width: "20", user_id: 1)

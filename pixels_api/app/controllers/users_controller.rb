@@ -26,7 +26,12 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: user_params[:username])
-    byebug
+    artwork = Artwork.where("user_id = #{user.id}")
+    if user
+      render json: user
+    else
+      render json: user.errors, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /users/1
