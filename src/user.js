@@ -10,6 +10,8 @@ const usernameInput = document.getElementById('username-input')
 const loginButton = document.getElementById('user-login')
 const loginInput = document.getElementById('username-login')
 const loginHideButtons = document.getElementById("login-container")
+const logoutButton = document.getElementById("logout-container")
+const logoutInput = document.getElementById("logoutButton")
 
 //CREATE USER
 
@@ -41,7 +43,6 @@ function postUser(username) {
 loginButton.addEventListener('submit' , function(x){
 	x.preventDefault();
     let username = loginInput.value
-    console.log(username)
     loginUser(username)
     loginInput.value = ""
 });
@@ -59,10 +60,26 @@ function loginUser(username) {
         body: JSON.stringify({user: user})
     })
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => {
+        currentUser = data;
+        hideLoginButtons();
+        showLogoutButton();
+    })
 }
 
 //HIDE LOGIN BUTTONS
 function hideLoginButtons() {
     loginHideButtons.style.display = "none";
 }
+
+//LOUGOUT BUTTON
+function showLogoutButton() {
+    logoutButton.style.display = "inline";
+}
+
+//LOGOUT USER
+logoutButton.addEventListener("click", function(){
+    currentUser = {}
+    logoutButton.style.display = "none";
+    loginHideButtons.style.display = "inline";
+})

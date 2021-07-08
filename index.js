@@ -10,6 +10,8 @@ const fillArea = document.getElementById('fillArea');
 const eyedropper = document.getElementById('eyedropper');
 const grid = document.getElementById('pixelGrid');
 
+let currentUser = {}
+
 // MAKE GRID TABLE
 
 submitButton.addEventListener('click' , function(x){
