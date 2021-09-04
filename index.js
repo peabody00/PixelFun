@@ -189,34 +189,14 @@ function fillBucket(sr, sc, newColor, targetColor, current) {
 
 	if (current.style.backgroundColor === targetColor) {
 		current.style.backgroundColor = newColor
+	} else {
+		return;
 	}
 
-	// fillBucket(sr - 1, sc, newColor, targetColor, current);
+	fillBucket(sr - 1, sc, newColor, targetColor, current);
 	fillBucket(sr + 1, sc, newColor, targetColor, current);
-	// fillBucket(sr, sc - 1, newColor, targetColor, current);
-	// fillBucket(sr, sc + 1, newColor, targetColor, current);
-
-
-	// let up = grid.rows[sr - 1].cells[sc]
-	// let down = grid.rows[sr + 1].cells[sc]
-	// let left = grid.rows[sr].cells[sc - 1]
-	// let right = grid.rows[sr].cells[sc + 1]
-
-	// if (up.style.backgroundColor === targetColor) {
-	// 	up.style.backgroundColor = newColor
-	// }
-
-	// if (down.style.backgroundColor === targetColor) {
-	// 	down.style.backgroundColor = newColor
-	// }
-
-	// if (left.style.backgroundColor === targetColor) {
-	// 	left.style.backgroundColor = newColor
-	// }
-
-	// if (right.style.backgroundColor === targetColor) {
-	// 	right.style.backgroundColor = newColor
-	// }
+	fillBucket(sr, sc - 1, newColor, targetColor, current);
+	fillBucket(sr, sc + 1, newColor, targetColor, current);
 };
 
 

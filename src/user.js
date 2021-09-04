@@ -64,6 +64,7 @@ function loginUser(username) {
         currentUser = data;
         hideLoginButtons();
         showLogoutButton();
+        console.log(data)
     })
 }
 

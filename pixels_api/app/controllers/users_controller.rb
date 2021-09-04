@@ -26,9 +26,8 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(username: user_params[:username])
-    artwork = Artwork.where("user_id = #{user.id}")
     if user
-      render json: user
+      render json: user, include: :artworks
     else
       render json: user.errors, status: :unprocessable_entity
     end
