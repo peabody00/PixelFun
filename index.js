@@ -1,5 +1,6 @@
 const base_url = "http://localhost:3000"
 const userService = new UserService(base_url)
+// const artworkService = new ArtworkService(base_url)
 
 let gridColor = document.getElementById('colorPicker');
 let gridHeight = document.getElementById('inputHeight');
@@ -11,6 +12,10 @@ const eyedropper = document.getElementById('eyedropper');
 const grid = document.getElementById('pixelGrid');
 
 let currentUser = {}
+
+window.oncontextmenu = (e) => {
+	e.preventDefault();
+}
 
 // MAKE GRID TABLE
 
@@ -120,7 +125,7 @@ eyedropper.addEventListener('click', function(x) {
 
 // DOUBLE CLICK TO ERASE
 
-grid.addEventListener('dblclick', function(x) {
+grid.addEventListener('contextmenu', function(x) {
 	x.target.style.backgroundColor = null; 
 });
 
@@ -161,25 +166,19 @@ function fillBucket(sr, sc, newColor, targetColor, current) {
 		current = grid.rows[sr].cells[sc];
 	}
 
-	console.log(sr,sc)
-
 	if (sr < 0) {
-		console.log("row less than 0")
         return;
     }
 
 	if (sc < 0) {
-		console.log("column less than 0")
         return;
     }
 
 	if (sr > gridHeight.value - 1) {
-		console.log("row greater than height")
         return;
     }
 
 	if (sc > gridWidth.value - 1) {
-		console.log("column greater than width")
         return;
     }
 
@@ -198,37 +197,3 @@ function fillBucket(sr, sc, newColor, targetColor, current) {
 	fillBucket(sr, sc - 1, newColor, targetColor, current);
 	fillBucket(sr, sc + 1, newColor, targetColor, current);
 };
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', welcome)
-
-// function welcome() {
-//     const h2 = document.createElement('h2')
-//     const h3 = document.createElement('h3')
-//     const guestButton = document.createElement('button')
-//     const container = document.getElementById('welcome-container')
-//     container.append(h2)
-//     h2.innerText = 'Welcome to Pixel Fun'
-//     container.append(h3)
-//     h3.innerText = 'Please select an option'
-//     container.append(guestButton)
-//     guestButton.innerText = 'Continue as Guest'
-//     guestButton.setAttribute('onclick', 'guestArtwork()')
-
-// }
-
-// function guestArtwork() {
-//     const container = document.getElementById('welcome-container')
-//     container.innerHTML = ''
-//     addTools();
-//     // new Artwork()
-// }

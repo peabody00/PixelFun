@@ -9,9 +9,10 @@ const userButton = document.getElementById('user-create')
 const usernameInput = document.getElementById('username-input')
 const loginButton = document.getElementById('user-login')
 const loginInput = document.getElementById('username-login')
-const loginHideButtons = document.getElementById("login-container")
-const logoutButton = document.getElementById("logout-container")
-const logoutInput = document.getElementById("logoutButton")
+const loginHideButtons = document.getElementById('login-container')
+const logoutButton = document.getElementById('logout-container')
+const logoutInput = document.getElementById('logoutButton')
+const userInfo = document.getElementById('user-info')
 
 //CREATE USER
 
@@ -64,6 +65,8 @@ function loginUser(username) {
         currentUser = data;
         hideLoginButtons();
         showLogoutButton();
+        showSaveDeleteButtons();
+        showUserInfo();
         console.log(data)
     })
 }
@@ -83,4 +86,12 @@ logoutButton.addEventListener("click", function(){
     currentUser = {}
     logoutButton.style.display = "none";
     loginHideButtons.style.display = "inline";
+    hideSaveDeleteButtons()
 })
+
+// SHOW USER INFO
+function showUserInfo() {
+    userInfo.style.display = "inline"
+    const artList = currentUser.artworks
+    console.log(artList[0]["name"])
+}

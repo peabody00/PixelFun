@@ -9,9 +9,22 @@ class Artwork{
 }
 
 const artworkSaveButton = document.getElementById(`saveButton`)
+const artworkInfo = document.getElementById(`artwork-info`)
+const artworkTitle = document.getElementById(`artworkTitle`)
 
+//SHOW SAVE AND DELETE BUTTONS
+function showSaveDeleteButtons() {
+    artworkInfo.style.display = "inline";
+}
+
+//HiDE SAVE AND DELETE BUTTONS
+function hideSaveDeleteButtons() {
+    artworkInfo.style.display = "none";
+}
+
+//SAVE ARTWORK
 artworkSaveButton.addEventListener('click', function(x) {
-    let name = "Default"
+    let name = artworkTitle.value
     let height = grid.rows.length
     let firstRow = [...grid.rows][0]
     let width = [...firstRow.childNodes].length
@@ -23,5 +36,23 @@ artworkSaveButton.addEventListener('click', function(x) {
         return cellArray.join(";")
     });
     let finalString = artworkString.join(":")
-    console.log(finalString)
+    saveArtwork(name, height, width, finalString, userID)
 })
+
+function saveArtwork(name, height, width, finalString, userID) {
+    console.log(name)
+    console.log(height)
+    console.log(width)
+    console.log(finalString)
+    console.log(userID)
+
+    // fetch(`not sure what goes here`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({user: user,})
+    // })
+    //     .then(resp => resp.json())
+    //     .then(data => console.log(data))
+}

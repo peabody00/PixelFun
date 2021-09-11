@@ -24,20 +24,27 @@
         <input type="button" id="fill" value="fill canvas">
         <input type="button" id="fillArea" value="fill area">
         <input type="button" id="eyedropper" value="eyedropper">
+        <p>Right click to erase a pixel.</p>
     </div>
     <div id='artwork-container'>
         <h2>Design Canvas</h2>
         <table id="pixelGrid"></table>
     </div>
     <br><br>
-    <div id="artwork-info" style=>
+    <div id="artwork-info" style="display: none;">
+        <label for="artworkTitle">Title:</label>
+        <input type="text" id="artworkTitle" name="Title">
         <input type="button" id="saveButton" value="Save">
         <input type="button" id="deleteButton" value="Delete">
 
     </div>
+    <br><br>
     <div id="user-info" style="display: none;">
+        Artworks:
 
     </div>
+    <br>
+    <br>
     <div id='user-login'>
         <div id="login-container">
             <form id="user-create">
