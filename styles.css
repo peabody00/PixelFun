@@ -44,3 +44,8 @@ input[type=number] {
     /* float: right; */
     /* background-color: gray; */
 }
+
+ol > li:hover {
+    color:blue;
+    cursor:pointer;
+}

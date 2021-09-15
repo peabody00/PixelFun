@@ -1,14 +1,16 @@
 class Artwork{
-    constructor(name,height,width,grid, user_id) {
+    constructor(primaryKey, name, height, width, grid, user_id) {
+        this.primaryKey = primaryKey,
         this.name = name,
         this.height = height,
         this.width = width,
-        this.grid = grid
+        this.grid = grid,
         this.user_id = user_id
     }
 }
 
 const artworkSaveButton = document.getElementById(`saveButton`)
+const artworkdeleteButton = document.getElementById(`deleteButton`)
 const artworkInfo = document.getElementById(`artwork-info`)
 const artworkTitle = document.getElementById(`artworkTitle`)
 
@@ -24,6 +26,11 @@ function hideSaveDeleteButtons() {
 
 //SAVE ARTWORK
 artworkSaveButton.addEventListener('click', function(x) {
+    if (grid.innerHTML === "" || grid.innerHTML === " ") {
+        alert('No Design Canvas')
+        return
+    }
+
     let name = artworkTitle.value
     let height = grid.rows.length
     let firstRow = [...grid.rows][0]
@@ -36,7 +43,12 @@ artworkSaveButton.addEventListener('click', function(x) {
         return cellArray.join(";")
     });
     let finalString = artworkString.join(":")
-    saveArtwork(name, height, width, finalString, userID)
+
+    if (name === "") {
+        alert('Title of artwork cannot be blank.')
+    } else {
+        saveArtwork(name, height, width, finalString, userID)
+    }
 })
 
 function saveArtwork(name, height, width, finalString, userID) {
@@ -46,13 +58,42 @@ function saveArtwork(name, height, width, finalString, userID) {
     console.log(finalString)
     console.log(userID)
 
-    // fetch(`not sure what goes here`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({user: user,})
-    // })
-    //     .then(resp => resp.json())
-    //     .then(data => console.log(data))
+    let artwork = {
+        name: name,
+        height: height,
+        width: width,
+        grid: finalString,
+        user_id: userID,
+    }
+
+    fetch(`${userService.endpoint}/artworks`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({artwork: artwork})
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
+            userArtworkInfo(data)
+        })
 }
+
+// DELETE ARTWORK
+
+artworkdeleteButton.addEventListener('click', function(x) {
+
+    fetch(`${userService.endpoint}/artworks/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({artwork: artwork})
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
+            console.log(artwork1)
+        })
+})

@@ -22,8 +22,8 @@ window.oncontextmenu = (e) => {
 submitButton.addEventListener('click' , function(x){
 	grid.innerHTML = " ";
 	x.preventDefault();
-	if (gridHeight.value > 64 || gridWidth.value > 64) {
-		alert("Grid measurements cannot be greater than 64.")
+	if (gridHeight.value > 64 || gridWidth.value > 64 || gridHeight.value == 0 || gridWidth.value == 0) {
+		alert("Grid measurements cannot be greater than 64 or 0.")
 	} else {
 		makeGrid();	
 	}	

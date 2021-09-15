@@ -87,11 +87,38 @@ logoutButton.addEventListener("click", function(){
     logoutButton.style.display = "none";
     loginHideButtons.style.display = "inline";
     hideSaveDeleteButtons()
+    hideUserInfo()
 })
 
 // SHOW USER INFO
 function showUserInfo() {
-    userInfo.style.display = "inline"
+    
     const artList = currentUser.artworks
-    console.log(artList[0]["name"])
+    const ol = document.createElement('ol')
+    
+    userInfo.style.display = "inline"
+    userInfo.innerText = 'Artwork:'
+    userInfo.append(ol)
+    artList.map(artwork => {
+        userArtworkInfo(artwork)
+    })
 }
+
+// RESHOW USER INFO
+function userArtworkInfo(artwork) { 
+    const ol = document.querySelector('ol')
+    const li = document.createElement('li')
+    li.addEventListener('click', function(x) {
+        console.log('Test')
+    })
+    li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
+    li.id = artwork.id
+    ol.append(li)
+}
+
+// HIDE USER INFO
+function hideUserInfo() {
+    userInfo.style.display = "none"
+    userInfo.innerHTML = ""
+}
+
