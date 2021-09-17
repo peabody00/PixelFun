@@ -109,7 +109,9 @@ function userArtworkInfo(artwork) {
     const ol = document.querySelector('ol')
     const li = document.createElement('li')
     li.addEventListener('click', function(x) {
-        console.log('Test')
+        console.log(artwork.id)
+        
+
     })
     li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
     li.id = artwork.id

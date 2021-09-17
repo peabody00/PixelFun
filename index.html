@@ -16,14 +16,14 @@
             <input type="number" id="inputHeight" name="height" min="1" value="10">
             Grid Width:
             <input type="number" id="inputWidth" name="width" min="1" value="10">
-            <input type="submit" id="submitButton">
+            <input type="submit" id="submitButton" class="button">
         </form>
 
         <h2>Pick A Color</h2>
         <input type="color" id="colorPicker">
-        <input type="button" id="fill" value="fill canvas">
-        <input type="button" id="fillArea" value="fill area">
-        <input type="button" id="eyedropper" value="eyedropper">
+        <input type="button" id="fill" value="fill canvas" class="button">
+        <input type="button" id="fillArea" value="fill area" class="button">
+        <input type="button" id="eyedropper" value="eyedropper" class="button">
         <p>Right click to erase a pixel.</p>
     </div>
     <div id='artwork-container'>
@@ -34,8 +34,8 @@
     <div id="artwork-info" style="display: none;">
         <label for="artworkTitle">Title:</label>
         <input type="text" id="artworkTitle" name="Title">
-        <input type="button" id="saveButton" value="Save">
-        <input type="button" id="deleteButton" value="Delete">
+        <input type="button" id="saveButton" value="Save" class="button">
+        <input type="button" id="deleteButton" value="Delete" class="button">
 
     </div>
     <br><br>
@@ -45,19 +45,20 @@
     <br>
     <div id='user-login'>
         <div id="login-container">
+            <br>
             <form id="user-create">
                 New User
                 <input type="text" id="username-input">
-                <input type="submit" id="submitButton" value="Create">
+                <input type="submit" id="submitButton" value="Create" class="button">
             </form>
             <form id="user-login">
                 Login
                 <input type="text" id="username-login">
-                <input type="submit" id="submitButton" value="Login">
+                <input type="submit" id="submitButton" value="Login" class="button">
             </form>
         </div>
         <div id="logout-container" style="display: none;">
-            <input type="button" id="logoutButton" value="Logout">
+            <input type="button" id="logoutButton" value="Logout" class="button">
         </div>
     </div>
 

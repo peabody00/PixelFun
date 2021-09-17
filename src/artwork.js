@@ -52,12 +52,6 @@ artworkSaveButton.addEventListener('click', function(x) {
 })
 
 function saveArtwork(name, height, width, finalString, userID) {
-    console.log(name)
-    console.log(height)
-    console.log(width)
-    console.log(finalString)
-    console.log(userID)
-
     let artwork = {
         name: name,
         height: height,
@@ -77,23 +71,34 @@ function saveArtwork(name, height, width, finalString, userID) {
         .then(data => {
             let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
             userArtworkInfo(data)
+            console.log(artwork1)
         })
 }
+
+//LOAD ARTWORK
+
+
 
 // DELETE ARTWORK
 
 artworkdeleteButton.addEventListener('click', function(x) {
+    let prompt = confirm('Are you sure you want to delete this artwork?')
 
-    fetch(`${userService.endpoint}/artworks/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({artwork: artwork})
-    })
-        .then(resp => resp.json())
-        .then(data => {
-            let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
-            console.log(artwork1)
+    if (prompt == true){
+        fetch(`${userService.endpoint}/artworks/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({artwork: artwork})
         })
+            .then(resp => resp.json())
+            .then(data => {
+                let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
+                console.log(artwork1)
+            })
+    } else {
+        return
+    }
+        
 })
