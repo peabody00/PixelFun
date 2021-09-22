@@ -19,7 +19,7 @@ function showSaveDeleteButtons() {
     artworkInfo.style.display = "inline";
 }
 
-//HiDE SAVE AND DELETE BUTTONS
+//HIDE SAVE AND DELETE BUTTONS
 function hideSaveDeleteButtons() {
     artworkInfo.style.display = "none";
 }

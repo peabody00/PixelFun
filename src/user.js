@@ -110,9 +110,15 @@ function userArtworkInfo(artwork) {
     const li = document.createElement('li')
     li.addEventListener('click', function(x) {
         console.log(artwork.id)
+        grid.innerHTML = " ";
+        gridHeight.value = artwork.height
+        gridWidth.value = artwork.width
+        makeGrid()
+        importArtwork(artwork)
         
 
     })
+
     li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
     li.id = artwork.id
     ol.append(li)
@@ -124,3 +130,11 @@ function hideUserInfo() {
     userInfo.innerHTML = ""
 }
 
+// IMPORTS USER ARTWORK STRING
+function importArtwork(artwork) {
+    let artworkArray = artwork.grid.split(/[:;]+/)
+    console.log(artworkArray)
+    console.log(grid.rows[0].cells[0].style.backgroundColor)
+    grid.rows[0].cells[0].style.backgroundColor = artworkArray[0]
+
+}
