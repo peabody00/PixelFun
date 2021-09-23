@@ -20,13 +20,15 @@ window.oncontextmenu = (e) => {
 // MAKE GRID TABLE
 
 submitButton.addEventListener('click' , function(x){
-	grid.innerHTML = " ";
+	grid.innerHTML = "";
 	x.preventDefault();
 	if (gridHeight.value > 64 || gridWidth.value > 64 || gridHeight.value == 0 || gridWidth.value == 0) {
 		alert("Grid measurements cannot be greater than 64 or 0.")
 	} else {
-		makeGrid();	
-	}	
+		makeGrid();
+		artworkTitle.value = ""
+		hideUpdateShowSaveButton()
+	}
 });
 
 function makeGrid() {
@@ -83,7 +85,6 @@ grid.addEventListener('mousedown', function(x) {
 				currentColor = gridColor.value
 				fillBoolean = false
 				const original = grid.rows[rowNumber].cells[colNumber];
-				// floodFill(rowNumber,colNumber, currentColor, targetColor)
 				fillBucket(rowNumber,colNumber, currentColor, targetColor, original)
 			}	
 	}
@@ -123,7 +124,7 @@ eyedropper.addEventListener('click', function(x) {
 	eyedropperBoolean = true;
 });
 
-// DOUBLE CLICK TO ERASE
+// RIGHT CLICK TO ERASE
 
 grid.addEventListener('contextmenu', function(x) {
 	x.target.style.backgroundColor = null; 
@@ -143,23 +144,6 @@ fillArea.addEventListener('click', function(x) {
 	
 });
 
-// function floodFill(sr, sc, currentColor, targetColor) {
-//     //Get the input which needs to be replaced.
-// 	if (grid.rows[sr]) {
-// 		current = grid.rows[sr].cells[sc];
-// 	}
-//     // const current = grid.rows[sr].cells[sc];
-    
-//     //If the newColor is same as the existing 
-//     //Then return the original image.
-//     if(current.style.backgroundColor === currentColor){
-// 		console.log("first function")
-//         return;
-//     }
-    
-//     //Other wise call the fill function which will fill in the existing image.
-//     fillBucket(sr, sc, currentColor,targetColor, current);
-// };
 
 function fillBucket(sr, sc, newColor, targetColor, current) {
 	if (grid.rows[sr]) {

@@ -18,9 +18,13 @@ const userInfo = document.getElementById('user-info')
 
 userButton.addEventListener('submit' , function(x){
 	x.preventDefault();
-    let username = usernameInput.value
-    postUser(username)
-    usernameInput.value = ""
+    if (usernameInput.value == '') {
+        alert("No username entered")
+    } else {
+        let username = usernameInput.value
+        postUser(username)
+        usernameInput.value = ""
+    }
 });
 
 function postUser(username) {
@@ -43,9 +47,13 @@ function postUser(username) {
 
 loginButton.addEventListener('submit' , function(x){
 	x.preventDefault();
-    let username = loginInput.value
-    loginUser(username)
-    loginInput.value = ""
+    if (loginInput.value == '') {
+        alert("No username entered")
+    } else {
+        let username = loginInput.value
+        loginUser(username)
+        loginInput.value = ""
+    }
 });
 
 function loginUser(username) {
@@ -88,6 +96,8 @@ logoutButton.addEventListener("click", function(){
     loginHideButtons.style.display = "inline";
     hideSaveDeleteButtons()
     hideUserInfo()
+    grid.innerHTML = "";
+    artworkTitle.value = ""
 })
 
 // SHOW USER INFO
@@ -101,6 +111,7 @@ function showUserInfo() {
     userInfo.append(ol)
     artList.map(artwork => {
         userArtworkInfo(artwork)
+        //BUG - WHEN UPDATING LOADED ARTWORK, NEW TITLE APPENDED TO THE END OF ART LIST
     })
 }
 
@@ -115,8 +126,6 @@ function userArtworkInfo(artwork) {
         gridWidth.value = artwork.width
         makeGrid()
         importArtwork(artwork)
-        
-
     })
 
     li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
@@ -131,10 +140,21 @@ function hideUserInfo() {
 }
 
 // IMPORTS USER ARTWORK STRING
-function importArtwork(artwork) {
-    let artworkArray = artwork.grid.split(/[:;]+/)
-    console.log(artworkArray)
-    console.log(grid.rows[0].cells[0].style.backgroundColor)
-    grid.rows[0].cells[0].style.backgroundColor = artworkArray[0]
+// function importArtwork(artwork) {
+//     let rows = artwork.grid.split(":")
 
-}
+//     for (let i = 0; i < rows.length; i++){
+//         const rowData = rows[i].split(";")
+//         for (let j = 0; j < rowData.length; j++){
+//             grid.rows[i].cells[j].style.backgroundColor = rowData[j]
+//         }
+//     }
+//     setArtworkName(artwork) 
+// }
+
+// function setArtworkName (artwork) {
+//     artworkTitle.value = artwork.name
+//     artworkSaveButton.style.display = "none"
+//     artworkUpdateButton.style.display = "inline"
+
+// }
