@@ -36,6 +36,7 @@ class ArtworksController < ApplicationController
   # DELETE /artworks/1
   def destroy
     @artwork.destroy
+    render json: @artwork
   end
 
   private

@@ -17,24 +17,24 @@ const artworkTitle = document.getElementById(`artworkTitle`)
 
 let currentArtwork = {}
 
-//SHOW SAVE AND DELETE BUTTONS
+// SHOW SAVE AND DELETE BUTTONS
 function showSaveDeleteButtons() {
-    artworkInfo.style.display = "inline";
+    artworkInfo.style.display = "inline"
     hideUpdateShowSaveButton()
 }
 
-//HIDE SAVE AND DELETE BUTTONS
+// HIDE SAVE AND DELETE BUTTONS
 function hideSaveDeleteButtons() {
-    artworkInfo.style.display = "none";
+    artworkInfo.style.display = "none"
 }
 
-//HIDE UPDATE AND SHOW SAVE BUTTON
+// HIDE UPDATE AND SHOW SAVE BUTTON
 function hideUpdateShowSaveButton() {
     artworkUpdateButton.style.display = "none"
     artworkSaveButton.style.display = "inline"
 }
 
-//SAVE ARTWORK
+// SAVE ARTWORK
 artworkSaveButton.addEventListener('click', function(x) {
     if (grid.innerHTML === "" || grid.innerHTML === " ") {
         alert('No Design Canvas')
@@ -62,6 +62,7 @@ artworkSaveButton.addEventListener('click', function(x) {
 })
 
 // SAVES ARTWORK TO DATABASE
+
 function saveArtwork(name, height, width, finalString, userID) {
     let artwork = {
         name: name,
@@ -82,13 +83,15 @@ function saveArtwork(name, height, width, finalString, userID) {
         .then(data => {
             let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
             userArtworkInfo(data)
+            currentArtwork = data
             console.log(artwork1)
+
         })
         artworkSaveButton.style.display = "none"
         artworkUpdateButton.style.display = "inline"
 }
 
-//LOAD ARTWORK
+// LOAD ARTWORK
 
 function importArtwork(artwork) {
     let rows = artwork.grid.split(":")
@@ -111,6 +114,7 @@ function setArtworkName (artwork) {
 }
 
 // UPDATE ARTWORK
+
 artworkUpdateButton.addEventListener('click', function(x) {
     let name = artworkTitle.value
     let height = grid.rows.length
@@ -122,7 +126,8 @@ artworkUpdateButton.addEventListener('click', function(x) {
             return cell.style.backgroundColor
         })
         return cellArray.join(";")
-    });
+    })
+    
     let finalString = artworkString.join(":")
 
     if (name === "") {
@@ -151,6 +156,8 @@ function updateArtwork(name, height, width, finalString, userID) {
         .then(resp => resp.json())
         .then(data => {
             let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
+            let removeLI = document.getElementById(`${data.id}`) 
+            removeLI.remove()
             userArtworkInfo(data)
             console.log(artwork1)
         })
@@ -169,17 +176,19 @@ artworkdeleteButton.addEventListener('click', function(x) {
             // },
             // body: JSON.stringify({artwork: artwork})
         })
-            // .then(resp => resp.json())
-            .then(function() {
+            .then(resp => resp.json())
+            .then(function(data) {
                 clearAfterDelete()
                 alert(`${currentArtwork.name} was deleted`)
+                let removeLI = document.getElementById(`${data.id}`) 
+                removeLI.remove()
             })
     } else {
         return
     }        
 })
 
-//DELETE - CLEAR GRID AND TITLE
+// DELETE - CLEAR GRID AND TITLE
 
 function clearAfterDelete() {
     grid.innerHTML = ""

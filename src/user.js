@@ -1,7 +1,7 @@
 class User {
     constructor(id, username) {
         this.id = id
-        this.username = username;
+        this.username = username
     }
 }
 
@@ -14,10 +14,10 @@ const logoutButton = document.getElementById('logout-container')
 const logoutInput = document.getElementById('logoutButton')
 const userInfo = document.getElementById('user-info')
 
-//CREATE USER
+// CREATE USER
 
 userButton.addEventListener('submit' , function(x){
-	x.preventDefault();
+	x.preventDefault()
     if (usernameInput.value == '') {
         alert("No username entered")
     } else {
@@ -25,7 +25,7 @@ userButton.addEventListener('submit' , function(x){
         postUser(username)
         usernameInput.value = ""
     }
-});
+})
 
 function postUser(username) {
     let user = {
@@ -43,10 +43,10 @@ function postUser(username) {
     .then(data => console.log(data))
 }
 
-//LOGIN USER
+// LOGIN USER
 
 loginButton.addEventListener('submit' , function(x){
-	x.preventDefault();
+	x.preventDefault()
     if (loginInput.value == '') {
         alert("No username entered")
     } else {
@@ -54,7 +54,7 @@ loginButton.addEventListener('submit' , function(x){
         loginUser(username)
         loginInput.value = ""
     }
-});
+})
 
 function loginUser(username) {
     let user = {
@@ -70,33 +70,33 @@ function loginUser(username) {
     })
     .then(resp => resp.json())
     .then(data => {
-        currentUser = data;
-        hideLoginButtons();
-        showLogoutButton();
-        showSaveDeleteButtons();
-        showUserInfo();
+        currentUser = data
+        hideLoginButtons()
+        showLogoutButton()
+        showSaveDeleteButtons()
+        showUserInfo()
         console.log(data)
     })
 }
 
-//HIDE LOGIN BUTTONS
+// HIDE LOGIN BUTTONS
 function hideLoginButtons() {
-    loginHideButtons.style.display = "none";
+    loginHideButtons.style.display = "none"
 }
 
-//LOUGOUT BUTTON
+// LOUGOUT BUTTON
 function showLogoutButton() {
-    logoutButton.style.display = "inline";
+    logoutButton.style.display = "inline"
 }
 
-//LOGOUT USER
+// LOGOUT USER
 logoutButton.addEventListener("click", function(){
     currentUser = {}
-    logoutButton.style.display = "none";
-    loginHideButtons.style.display = "inline";
+    logoutButton.style.display = "none"
+    loginHideButtons.style.display = "inline"
     hideSaveDeleteButtons()
     hideUserInfo()
-    grid.innerHTML = "";
+    grid.innerHTML = ""
     artworkTitle.value = ""
 })
 
@@ -104,20 +104,19 @@ logoutButton.addEventListener("click", function(){
 function showUserInfo() {
     
     const artList = currentUser.artworks
-    const ol = document.createElement('ol')
+    const ul = document.createElement('ul')
     
     userInfo.style.display = "inline"
-    userInfo.innerText = 'Artwork:'
-    userInfo.append(ol)
+    userInfo.innerHTML = '<strong>Artwork:</strong>'
+    userInfo.append(ul)
     artList.map(artwork => {
         userArtworkInfo(artwork)
-        //BUG - WHEN UPDATING LOADED ARTWORK, NEW TITLE APPENDED TO THE END OF ART LIST
     })
 }
 
 // RESHOW USER INFO
 function userArtworkInfo(artwork) { 
-    const ol = document.querySelector('ol')
+    const ul = document.querySelector('ul')
     const li = document.createElement('li')
     li.addEventListener('click', function(x) {
         console.log(artwork.id)
@@ -130,7 +129,7 @@ function userArtworkInfo(artwork) {
 
     li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
     li.id = artwork.id
-    ol.append(li)
+    ul.append(li)
 }
 
 // HIDE USER INFO
@@ -138,23 +137,3 @@ function hideUserInfo() {
     userInfo.style.display = "none"
     userInfo.innerHTML = ""
 }
-
-// IMPORTS USER ARTWORK STRING
-// function importArtwork(artwork) {
-//     let rows = artwork.grid.split(":")
-
-//     for (let i = 0; i < rows.length; i++){
-//         const rowData = rows[i].split(";")
-//         for (let j = 0; j < rowData.length; j++){
-//             grid.rows[i].cells[j].style.backgroundColor = rowData[j]
-//         }
-//     }
-//     setArtworkName(artwork) 
-// }
-
-// function setArtworkName (artwork) {
-//     artworkTitle.value = artwork.name
-//     artworkSaveButton.style.display = "none"
-//     artworkUpdateButton.style.display = "inline"
-
-// }

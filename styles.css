@@ -51,7 +51,17 @@ input[type=number] {
     width: 25%;
 } */
 
-ol > li:hover {
+/* #user-info {
+    position:relative;
+    float: left;
+    left: 30px;
+    background-color: lightgray;
+    border: 3px solid black;
+    height: 100px;
+    width: 25%;
+} */
+
+ul > li:hover {
     color:blue;
     cursor:pointer;
 }
