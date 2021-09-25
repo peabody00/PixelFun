@@ -1,11 +1,25 @@
 class Artwork{
-    constructor(primaryKey, name, height, width, grid, user_id) {
-        this.primaryKey = primaryKey,
+    constructor(id, name, height, width, grid, user_id) {
+        this.id = id,
         this.name = name,
         this.height = height,
         this.width = width,
         this.grid = grid,
         this.user_id = user_id
+
+    }
+
+    importArtwork() {
+        let rows = this.grid.split(":")
+    
+        for (let i = 0; i < rows.length; i++){
+            const rowData = rows[i].split(";")
+            for (let j = 0; j < rowData.length; j++){
+                grid.rows[i].cells[j].style.backgroundColor = rowData[j]
+            }
+        }
+        setArtworkName(this)
+        currentArtwork = this
     }
 }
 
@@ -83,8 +97,7 @@ function saveArtwork(name, height, width, finalString, userID) {
         .then(data => {
             let artwork1 = new Artwork(data.id, data.name, data.height, data.width, data.grid, data.user_id)
             userArtworkInfo(data)
-            currentArtwork = data
-            console.log(artwork1)
+            currentArtwork = artwork1
 
         })
         artworkSaveButton.style.display = "none"
@@ -93,18 +106,18 @@ function saveArtwork(name, height, width, finalString, userID) {
 
 // LOAD ARTWORK
 
-function importArtwork(artwork) {
-    let rows = artwork.grid.split(":")
+// function importArtwork(artwork) {
+//     let rows = artwork.grid.split(":")
 
-    for (let i = 0; i < rows.length; i++){
-        const rowData = rows[i].split(";")
-        for (let j = 0; j < rowData.length; j++){
-            grid.rows[i].cells[j].style.backgroundColor = rowData[j]
-        }
-    }
-    setArtworkName(artwork)
-    currentArtwork = artwork
-}
+//     for (let i = 0; i < rows.length; i++){
+//         const rowData = rows[i].split(";")
+//         for (let j = 0; j < rowData.length; j++){
+//             grid.rows[i].cells[j].style.backgroundColor = rowData[j]
+//         }
+//     }
+//     setArtworkName(artwork)
+//     currentArtwork = artwork
+// }
 
 function setArtworkName (artwork) {
     artworkTitle.value = artwork.name

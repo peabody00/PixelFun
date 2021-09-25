@@ -16,11 +16,13 @@ const userInfo = document.getElementById('user-info')
 
 // CREATE USER
 
-userButton.addEventListener('submit' , function(x){
+userButton.addEventListener('submit', function(x){
 	x.preventDefault()
     if (usernameInput.value == '') {
-        alert("No username entered")
+        event.stopImmediatePropagation()
+        alert("Cannot create user. No username entered")
     } else {
+        event.stopImmediatePropagation()
         let username = usernameInput.value
         postUser(username)
         usernameInput.value = ""
@@ -45,7 +47,7 @@ function postUser(username) {
 
 // LOGIN USER
 
-loginButton.addEventListener('submit' , function(x){
+loginButton.addEventListener('submit', function(x){
 	x.preventDefault()
     if (loginInput.value == '') {
         alert("No username entered")
@@ -119,12 +121,14 @@ function userArtworkInfo(artwork) {
     const ul = document.querySelector('ul')
     const li = document.createElement('li')
     li.addEventListener('click', function(x) {
-        console.log(artwork.id)
-        grid.innerHTML = " ";
+        console.log(artwork)
+        grid.innerHTML = " "
         gridHeight.value = artwork.height
         gridWidth.value = artwork.width
         makeGrid()
-        importArtwork(artwork)
+        let artwork1 = new Artwork(artwork.id, artwork.name, artwork.height, artwork.width, artwork.grid, artwork.user_id)    
+        currentArtwork = artwork1
+        currentArtwork.importArtwork()
     })
 
     li.innerText = `${artwork.name} - ${artwork.height} x ${artwork.width}`
